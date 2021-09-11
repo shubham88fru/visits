@@ -1,0 +1,11 @@
+version: '3' #Version of docker compose we intend to use
+services: #In simple words one service means on container. We'll have 'n' service mappings for 'n' containers
+  redis-server: #Service 1 (container 1)
+    image: 'redis' #Image for service 1
+  node-app: #Service 2 (container 2)
+    #restart: 'no' #Never restart a stopped container no matter what. Default value.
+    #restart: always #Restart policy for this container to always restart if the container crashes
+    restart: on-failure #Restart policy for this container to only restart container if it existed with an error code.
+    build: . #Create image by doing a docker build
+    ports:
+      - '4001:8081' #Map 4001 of local machine to 8081 of the container 2
